@@ -2,7 +2,7 @@ public class ReverseString3
 {
 	public static void main(String[] args)
 	{
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		String input="Let's take LeetCode contest";
 		System.out.println(reverseWords2(input));
 	}
@@ -51,7 +51,6 @@ public class ReverseString3
 	}
 	public static char[] reverseword2(char[] s,int index1,int index2)
 	{
-		boolean flag=true;
 		while(index1<index2)
 		{
 			char temp=s[index2];
@@ -59,8 +58,6 @@ public class ReverseString3
 			s[index1]=temp;
 			index1++;
 			index2--;
-			if(index1==index2||index1+1==index2)
-				flag=false;
 		}
 		return s;
 	}
