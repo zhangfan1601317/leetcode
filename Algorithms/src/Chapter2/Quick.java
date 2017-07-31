@@ -1,14 +1,9 @@
 package Chapter2;
 
-import java.util.Scanner;
-
-import Chapter1.In;
-import Chapter1.StdIn;
 import Chapter1.StdOut;
 
-public class Example
+public class Quick
 {
-
 	public static void  sort(Comparable[] a){
 		StdRandom.shuffle(a);//消除对输入的依赖
 		sort(a, 0, a.length-1);
@@ -62,5 +57,4 @@ public class Example
 		assert isSorted(a);
 		show(a);
 	}
-
 }

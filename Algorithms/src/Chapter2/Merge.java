@@ -1,36 +1,34 @@
 package Chapter2;
 
-import java.util.Scanner;
-
-import Chapter1.In;
-import Chapter1.StdIn;
 import Chapter1.StdOut;
 
-public class Example
+public class Merge
 {
-
-	public static void  sort(Comparable[] a){
-		StdRandom.shuffle(a);//消除对输入的依赖
-		sort(a, 0, a.length-1);
+	//自顶向下的归并排序
+	private static Comparable[] aux;
+	public static void sort(Comparable[] a){
+		aux=new Comparable[a.length];
+		sort(a,0,a.length-1);
 	}
-	private static void  sort(Comparable[]a,int lo,int hi)
-	{
-		if(hi<=lo)return;
-		int j=partion(a, lo, hi);
-		sort(a, lo, j-1);
-		sort(a, j+1, hi);
+	private static void sort(Comparable[]a,int lo,int hi){
+		if(hi<=lo)
+			return ;
+		int mid=lo+(hi-lo)/2;
+		sort(a,lo,mid);
+		sort(a, mid+1, hi);
+		merge(a, lo, mid, hi);
 	}
-	private static int partion(Comparable[] a,int lo,int hi){
-		int i=lo,j=hi+1;
-		Comparable v=a[lo];
-		while(true){
-			while(less(a[++i], v)) if(i==hi)break;
-			while(less(v, a[--j])) if(j==lo)break;
-			if(i>=j) break;
-			exch(a, i, j);
+	public static void merge(Comparable[] a,int lo,int mid, int hi){
+		int i=lo,j=mid+1;
+		for(int k=lo;k<=hi;k++){
+			aux[k]=a[k];
 		}
-		exch(a, lo, j);
-		return j;
+		for(int k=lo;k<=hi;k++){
+			if(i>mid)a[k]=aux[j++];
+			else if(j>hi) a[k]=aux[i++];
+			else if(less(aux[j], aux[i])) a[k]=aux[j++];
+			else a[k]=aux[i++];
+		}
 	}
 	private static boolean less(Comparable v,Comparable w){
 		return v.compareTo(w)<0;
@@ -62,5 +60,4 @@ public class Example
 		assert isSorted(a);
 		show(a);
 	}
-
 }

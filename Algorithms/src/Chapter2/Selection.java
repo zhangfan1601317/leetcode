@@ -1,36 +1,20 @@
 package Chapter2;
 
-import java.util.Scanner;
-
-import Chapter1.In;
-import Chapter1.StdIn;
 import Chapter1.StdOut;
 
-public class Example
+public class Selection
 {
-
-	public static void  sort(Comparable[] a){
-		StdRandom.shuffle(a);//消除对输入的依赖
-		sort(a, 0, a.length-1);
-	}
-	private static void  sort(Comparable[]a,int lo,int hi)
+	//选择排序
+	public static void  sort(Comparable[] a)
 	{
-		if(hi<=lo)return;
-		int j=partion(a, lo, hi);
-		sort(a, lo, j-1);
-		sort(a, j+1, hi);
-	}
-	private static int partion(Comparable[] a,int lo,int hi){
-		int i=lo,j=hi+1;
-		Comparable v=a[lo];
-		while(true){
-			while(less(a[++i], v)) if(i==hi)break;
-			while(less(v, a[--j])) if(j==lo)break;
-			if(i>=j) break;
-			exch(a, i, j);
+		int N=a.length;
+		for(int i=0;i<N;i++){//每次循环找到最小的左边的不动，只改变右边的
+			int min=i;
+			for(int j=i+1;j<N;j++)
+				if(less(a[j], a[min]))//a[j]<a[min]交换
+					min=j;
+			exch(a, i, min);
 		}
-		exch(a, lo, j);
-		return j;
 	}
 	private static boolean less(Comparable v,Comparable w){
 		return v.compareTo(w)<0;
@@ -62,5 +46,4 @@ public class Example
 		assert isSorted(a);
 		show(a);
 	}
-
 }
